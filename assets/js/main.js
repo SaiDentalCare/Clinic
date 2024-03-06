@@ -205,14 +205,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// WhatsApp Integration
+
 function showEmailField() {
+  const nameInput = document.getElementById('nameInput').value.trim();
+
+  if (nameInput === "") {
+    displayAlert("Please enter your name before proceeding.", "alert-danger");
+    return;
+  }
+
   document.getElementById('nameField').style.display = 'none';
   document.getElementById('emailField').style.display = 'block';
   document.getElementById('messageField').style.display = 'none';
 }
 
 function showMessageField() {
+  const emailInput = document.getElementById('emailInput').value.trim();
+
+  if (!isValidEmail(emailInput)) {
+    displayAlert("Please enter a valid email address before proceeding.", "alert-danger");
+    return;
+  }
+
   document.getElementById('nameField').style.display = 'none';
   document.getElementById('emailField').style.display = 'none';
   document.getElementById('messageField').style.display = 'block';
@@ -225,12 +239,71 @@ function showNameField() {
 }
 
 function submitForm() {
-  // Assuming you want to send a message to WhatsApp here
-  const name = document.getElementById('nameInput').value;
-  const email = document.getElementById('emailInput').value;
-  const message = document.getElementById('messageInput').value;
+  const nameInput = document.getElementById('nameInput').value.trim();
+  const emailInput = document.getElementById('emailInput').value.trim();
+  const messageInput = document.getElementById('messageInput').value.trim();
 
-  const whatsappMessage = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
-  // Replace the following line with your logic to send the message to WhatsApp
-  alert("Sending message to WhatsApp:\n" + whatsappMessage);
+  if (nameInput === "") {
+    displayAlert("Please enter your name.", "alert-danger");
+    return;
+  }
+
+  if (!isValidEmail(emailInput)) {
+    displayAlert("Please enter a valid email address.", "alert-danger");
+    return;
+  }
+
+  if (messageInput === "") {
+    displayAlert("Please enter your message.", "alert-danger");
+    return;
+  }
+
+  // Proceed with form submission logic
+  const whatsappMessage = `Name: ${nameInput}\nEmail: ${emailInput}\nMessage: ${messageInput}`;
+  displayAlert("Sending message to WhatsApp:\n" + whatsappMessage, "alert-success");
 }
+
+function isValidEmail(email) {
+  // Basic email validation using a regular expression
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function displayAlert(message, alertClass) {
+  const alertContainer = document.getElementById('alertContainer');
+  alertContainer.innerHTML = `<div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>`;
+}
+
+
+// WhatsApp Integration
+// function showEmailField() {
+//   document.getElementById('nameField').style.display = 'none';
+//   document.getElementById('emailField').style.display = 'block';
+//   document.getElementById('messageField').style.display = 'none';
+// }
+
+// function showMessageField() {
+//   document.getElementById('nameField').style.display = 'none';
+//   document.getElementById('emailField').style.display = 'none';
+//   document.getElementById('messageField').style.display = 'block';
+// }
+
+// function showNameField() {
+//   document.getElementById('nameField').style.display = 'block';
+//   document.getElementById('emailField').style.display = 'none';
+//   document.getElementById('messageField').style.display = 'none';
+// }
+
+// function submitForm() {
+//   // Assuming you want to send a message to WhatsApp here
+//   const name = document.getElementById('nameInput').value;
+//   const email = document.getElementById('emailInput').value;
+//   const message = document.getElementById('messageInput').value;
+
+//   const whatsappMessage = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+//   // Replace the following line with your logic to send the message to WhatsApp
+//   alert("Sending message to WhatsApp:\n" + whatsappMessage);
+// }
