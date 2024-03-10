@@ -87,7 +87,7 @@ h6 {
 }
 
 .header .logo h1 {
-  font-size: 24px;
+  font-size: 20px;
   margin: 0;
   font-weight: 600;
   color: var(--heading-color);
@@ -104,8 +104,8 @@ h6 {
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
   background: var(--accent-color);
-  font-size: 14px;
-  padding: 8px 26px;
+  font-size: 12px;
+  padding: 6px 10px;
   margin: 0;
   border-radius: 4px;
   transition: 0.3s;
@@ -124,8 +124,8 @@ h6 {
 
   .header .btn-getstarted {
     order: 2;
-    margin: 0 15px 0 0;
-    padding: 6px 20px;
+    margin: 0 10px 0 0;
+    padding: 6px 5px;
   }
 
   .header .navmenu {
