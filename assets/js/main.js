@@ -206,61 +206,93 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function showEmailField() {
-  const nameInput = document.getElementById('nameInput').value.trim();
+function sendToWhatsapp2(){
+	let waNumber = "9848052840";
 
-  if (nameInput === "") {
-    displayAlert("Please enter your name before proceeding.", "alert-danger");
-    return;
-  }
+	let name = document.getElementById('name').value;
+	let email = document.getElementById('email').value;
+  let number = document.getElementById('number').value;
+	let message = document.getElementById('message').value;
 
-  document.getElementById('nameField').style.display = 'none';
-  document.getElementById('emailField').style.display = 'block';
-  document.getElementById('messageField').style.display = 'none';
+	var url = "https://wa.me/" + waNumber + "?text="
+	+ "*Name:* " +name+ "%0a"
+	+ "*Email:* " +email+ "%0a"
+  + "*Number:* " +number+ "%0a"
+	+ "*Message:* " +message+ "%0a%0a";
+
+	window.open(url, '_blank').focus();
 }
 
-function showMessageField() {
-  const emailInput = document.getElementById('emailInput').value.trim();
 
-  if (!isValidEmail(emailInput)) {
-    displayAlert("Please enter a valid email address before proceeding.", "alert-danger");
-    return;
-  }
-
-  document.getElementById('nameField').style.display = 'none';
-  document.getElementById('emailField').style.display = 'none';
-  document.getElementById('messageField').style.display = 'block';
-}
-
-function showNameField() {
-  document.getElementById('nameField').style.display = 'block';
-  document.getElementById('emailField').style.display = 'none';
-  document.getElementById('messageField').style.display = 'none';
-}
-
-function submitForm() {
+function sendToWhatsapp() {
+  let number = "9848052840";
   const nameInput = document.getElementById('nameInput').value.trim();
   const emailInput = document.getElementById('emailInput').value.trim();
+  const numberInput = document.getElementById('numberInput').value.trim();
   const messageInput = document.getElementById('messageInput').value.trim();
 
-  if (nameInput === "") {
-    displayAlert("Please enter your name.", "alert-danger");
+  var url = "https://wa.me/" + number + "?text="
+    + "*Name*: " + nameInput + "%0a"
+    + "*Email*: " + emailInput + "%0a"
+    + "*Number*: " + numberInput + "%0a"
+    + "*Message*: " + messageInput + "%0a%0a";
+
+  window.open(url, '_blank').focus();
+}
+
+function displayAlert(message, className) {
+  // Display validation message with proper CSS class
+  const alertDiv = document.createElement('div');
+  alertDiv.className = `alert ${className}`;
+  alertDiv.appendChild(document.createTextNode(message));
+
+  // Add styles for a smaller alert box and bottom margin
+  alertDiv.style.fontSize = '12px'; // Adjust the font size as needed
+  alertDiv.style.padding = '8px'; // Adjust the padding as needed
+  alertDiv.style.borderRadius = '4px'; // Add border-radius for rounded corners
+  alertDiv.style.marginBottom = '10px'; // Add bottom margin
+
+  const form = document.getElementById('signupForm');
+  form.insertBefore(alertDiv, form.firstChild); // Insert the alert at the beginning of the form
+
+  // Remove the alert after 3 seconds
+  setTimeout(() => {
+    alertDiv.remove();
+  }, 2000);
+}
+
+
+function nextField(nextFieldId, validationFunction = null) {
+  if (validationFunction && !window[validationFunction]()) {
     return;
   }
 
-  if (!isValidEmail(emailInput)) {
-    displayAlert("Please enter a valid email address.", "alert-danger");
-    return;
-  }
+  hideAllFields();
+  document.getElementById(nextFieldId).style.display = 'block';
 
-  if (messageInput === "") {
-    displayAlert("Please enter your message.", "alert-danger");
-    return;
+  // Focus on the first input field of the displayed section
+  const firstInputField = document.getElementById(nextFieldId).querySelector('input, textarea');
+  if (firstInputField) {
+    firstInputField.focus();
   }
+}
 
-  // Proceed with form submission logic
-  const whatsappMessage = `Name: ${nameInput}\nEmail: ${emailInput}\nMessage: ${messageInput}`;
-  displayAlert("Sending message to WhatsApp:\n" + whatsappMessage, "alert-success");
+function prevField(prevFieldId) {
+  hideAllFields();
+  document.getElementById(prevFieldId).style.display = 'block';
+
+  // Focus on the first input field of the displayed section
+  const firstInputField = document.getElementById(prevFieldId).querySelector('input, textarea');
+  if (firstInputField) {
+    firstInputField.focus();
+  }
+}
+
+function hideAllFields() {
+  const fieldIds = ['nameField', 'emailField', 'numberField', 'messageField'];
+  fieldIds.forEach(fieldId => {
+    document.getElementById(fieldId).style.display = 'none';
+  });
 }
 
 function isValidEmail(email) {
@@ -269,41 +301,53 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-function displayAlert(message, alertClass) {
-  const alertContainer = document.getElementById('alertContainer');
-  alertContainer.innerHTML = `<div class="alert ${alertClass} alert-dismissible fade show" role="alert">
-    ${message}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>`;
+function validateNameField() {
+  const nameInput = document.getElementById('nameInput').value.trim();
+
+  if (nameInput === "") {
+    displayAlert("Please enter your name.", "alert-danger");
+    return false;
+  }
+
+  return true;
+}
+
+function validateEmailField() {
+  const emailInput = document.getElementById('emailInput').value.trim();
+
+  if (!isValidEmail(emailInput)) {
+    displayAlert("Please enter a valid email address", "alert-danger");
+    return false;
+  }
+
+  return true;
+}
+
+function validateNumberField() {
+  const numberInput = document.getElementById('numberInput').value.trim();
+
+  if (numberInput === "" || !/^[0-9]{10}$/.test(numberInput)) {
+    displayAlert("Please enter a valid 10-digit number.", "alert-danger");
+    return false;
+  }
+
+  return true;
+}
+
+// Add event listener for Enter key press
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
+    event.preventDefault(); // Prevent default form submission behavior
+    simulateNextButtonClick();
+  }
+});
+
+function simulateNextButtonClick() {
+  const activeField = document.querySelector('.inputFields[style="display: block;"]');
+  const nextButton = activeField.querySelector('.btn-primary:not([onclick*="prevField"])');
+  if (nextButton) {
+    nextButton.click();
+  }
 }
 
 
-// WhatsApp Integration
-// function showEmailField() {
-//   document.getElementById('nameField').style.display = 'none';
-//   document.getElementById('emailField').style.display = 'block';
-//   document.getElementById('messageField').style.display = 'none';
-// }
-
-// function showMessageField() {
-//   document.getElementById('nameField').style.display = 'none';
-//   document.getElementById('emailField').style.display = 'none';
-//   document.getElementById('messageField').style.display = 'block';
-// }
-
-// function showNameField() {
-//   document.getElementById('nameField').style.display = 'block';
-//   document.getElementById('emailField').style.display = 'none';
-//   document.getElementById('messageField').style.display = 'none';
-// }
-
-// function submitForm() {
-//   // Assuming you want to send a message to WhatsApp here
-//   const name = document.getElementById('nameInput').value;
-//   const email = document.getElementById('emailInput').value;
-//   const message = document.getElementById('messageInput').value;
-
-//   const whatsappMessage = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
-//   // Replace the following line with your logic to send the message to WhatsApp
-//   alert("Sending message to WhatsApp:\n" + whatsappMessage);
-// }

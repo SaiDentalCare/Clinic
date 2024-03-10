@@ -38,7 +38,7 @@
 
       <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/services/tooth-extraction.png" alt="logo"> -->
+        <img src="assets/img/services/tooth-extraction.png" alt="logo">
         <h1 class="mx-4">Sai Dental Care</h1>
       </a>
 
@@ -49,10 +49,15 @@
           <li><a href="about.html">About</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="index.html#contact">Contact</a></li>
+          <li>
+            <a href="https://www.practo.com/hyderabad/clinic/sai-dental-care-moti-nagar-1-649209/reviews" target="_blank">
+            Reviews <i style="color: rgb(255, 217, 0);"  class="bi bi-star-fill"></i>
+            </a>
+          </li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav><!-- End Nav Menu -->
-      <a class="btn-getstarted" href="https://wa.me/9848052840" target="_blank">Book Appointment</a>
+      <a class="btn btn-getstarted" href="tel:+919848052840">Book Appointment <i class="bi bi-telephone-outbound-fill px-1"></i></a>
 
     </div>
   </header><!-- End Header -->
@@ -64,48 +69,6 @@
 
       <img src="assets/img/home/home-banner.jpg" alt="" data-aos="fade-in">
 
-      <!-- <div class="container">
-        <div class="row">
-          <div class="col-lg-10">
-            <h2 data-aos="fade-up" data-aos-delay="100">Welcome to Sai Dental Care</h2>
-            <p data-aos="fade-up" data-aos-delay="200">Your Smile is Our Priority - Providing Quality Dental Services</p>
-          </div>
-
-          <div class="col-lg-4">
-            <form action="#" class="sign-up-form" data-aos="fade-up" data-aos-delay="300" id="signupForm">
-              
-              <div id="nameField" class="form-floating mb-3">
-                <input type="text" class="form-control" id="nameInput" placeholder="Enter your name">
-                <label for="nameInput">Name</label>
-                <div class="d-flex justify-content-between mt-2">
-                  <input type="button" class="btn btn-primary" onclick="showEmailField()" value="Next">
-                </div>
-              </div>
-              
-              <div id="emailField" style="display: none;" class="inputFields form-floating mb-3">
-                <input type="email" class="form-control" id="emailInput" placeholder="Enter your email">
-                <label for="emailInput">Email</label>
-                <div class="d-flex justify-content-between mt-2">
-                  <input type="button" class="btn btn-primary" onclick="showNameField()" value="Back">
-                  <input type="button" class="btn btn-primary" onclick="showMessageField()" value="Next">
-                </div>
-              </div>
-              
-              <div id="messageField" style="display: none;" class="inputFields form-floating mb-3">
-                <textarea class="form-control" id="messageInput" placeholder="Enter your message"></textarea>
-                <label for="messageInput">Message</label>
-                <div class="d-flex justify-content-between mt-2">
-                  <input type="button" class="btn btn-primary" onclick="showEmailField()" value="Back">
-                  <input type="submit" class="btn btn-primary" onclick="submitForm()" value="Submit">
-                </div>
-              </div>
-              
-
-            </form>
-          </div>
-        </div>
-      </div> -->
-
       <div class="container">
         <div class="row">
           <div class="col-lg-10">
@@ -113,32 +76,39 @@
             <p data-aos="fade-up" data-aos-delay="200">Your Smile is Our Priority - Providing Quality Dental Services</p>
           </div>
           <div class="col-lg-4">
-            <form action="#" class="sign-up-form" data-aos="fade-up" data-aos-delay="300" id="signupForm">
-              <div id="nameField" class="inputFields" >
-                <input type="text" class="form-control" placeholder="Enter your name" id="nameInput" >
+            <form action="" class="sign-up-form" data-aos="fade-up" data-aos-delay="300" id="signupForm">
+              <div id="nameField" class="inputFields">
+                <input type="text" class="form-control" placeholder="Enter your name" id="nameInput" required>
                 <div class="d-flex justify-content-end mt-2">
-                  <input type="button" class="btn btn-primary" onclick="showEmailField()" value="Next">
+                  <input type="button" class="btn btn-primary" onclick="nextField('emailField')" value="Next">
                 </div>
               </div>
               <div id="emailField" style="display: none;" class="inputFields">
                 <input type="email" class="form-control mt-2" placeholder="Enter your email" id="emailInput">
                 <div class="d-flex justify-content-between mt-2">
-                  <input type="button" class="btn btn-primary" onclick="showNameField()" value="Back">
-                  <input type="button" class="btn btn-primary" onclick="showMessageField()" value="Next">
+                  <input type="button" class="btn btn-primary" onclick="prevField('nameField')" value="Back">
+                  <input type="button" class="btn btn-primary" onclick="nextField('numberField', 'validateEmailField')" value="Next">
+                </div>
+              </div>
+              <div id="numberField" style="display: none;" class="inputFields">
+                <input type="tel" class="form-control mt-2" placeholder="Enter your 10-digit number" id="numberInput" pattern="[0-9]{10}">
+                <div class="d-flex justify-content-between mt-2">
+                  <input type="button" class="btn btn-primary" onclick="prevField('emailField')" value="Back">
+                  <input type="button" class="btn btn-primary" onclick="nextField('messageField', 'validateNumberField')" value="Next">
                 </div>
               </div>
               <div id="messageField" style="display: none;" class="inputFields">
                 <textarea class="form-control mt-2" placeholder="Enter your message" id="messageInput"></textarea>
                 <div class="d-flex justify-content-between mt-2">
-                  <input type="button" class="btn btn-primary" onclick="showEmailField()" value="Back">
-                  <input type="submit" class="btn btn-primary" onclick="submitForm()" value="Submit">
+                  <input type="button" class="btn btn-primary" onclick="prevField('numberField')" value="Back">
+                  <input type="submit" class="btn btn-primary" onclick="sendToWhatsapp()" value="Submit">
                 </div>
               </div>
             </form>
+            
           </div>
         </div>
       </div> 
-      
 
     </section>
     <!-- End Hero Section -->
@@ -150,29 +120,30 @@
 
         <div class="row gy-4">
 
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
+          <div class="col-xl-2 col-md-3 col-4 client-logo">
             <img src="assets/img/services/caries.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
+          <div class="col-xl-2 col-md-3 col-4 client-logo">
             <img src="assets/img/services/toothache.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
+          <div class="col-lg-2 col-md-3 col-4 client-logo">
             <img src="assets/img/services/scaling.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
+          <div class="col-xl-2 col-md-3 col-4 client-logo">
             <img src="assets/img/services/tooth-extraction-1.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
+          <div class="col-xl-2 col-md-3 col-4 client-logo">
             <img src="assets/img/services/tooth-brush.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
 
-          <div class="col-xl-2 col-md-3 col-6 client-logo">
+          <div class="col-xl-2 col-md-3 col-4 client-logo">
             <img src="assets/img/services/tooth-checkup.png" class="img-fluid" alt="">
           </div><!-- End Client Item -->
+
 
         </div>
 
@@ -191,29 +162,30 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Clients</p>
+              <span data-purecounter-start="0" data-purecounter-end="40" data-purecounter-duration="2" class="purecounter"></span>
+              <p>Services</p>
             </div>
           </div><!-- End Stats Item -->
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Projects</p>
+              <span data-purecounter-start="0" data-purecounter-end="2004" data-purecounter-duration="0" class="purecounter"></span>
+              <p>Since</p>
             </div>
           </div><!-- End Stats Item -->
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Hours Of Support</p>
+              <span data-purecounter-start="0" data-purecounter-end="1440" data-purecounter-duration="2" class="purecounter"></span>
+              <p>Practo Reviews</p>
             </div>
           </div><!-- End Stats Item -->
 
           <div class="col-lg-3 col-md-6">
             <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="32" data-purecounter-duration="1" class="purecounter"></span>
-              <p>Workers</p>
+              <span data-purecounter-start="0" data-purecounter-end="2900" data-purecounter-duration="2" class="purecounter"></span>
+              <!-- <span id="visits">..</span> -->
+              <p>Site Visits</p>
             </div>
           </div><!-- End Stats Item -->
 
@@ -226,7 +198,7 @@
     <section id="maps" class="maps">
       <!--  Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Find Us On Google Maps 
+        <h2>Find Us On Maps 
           <a href="https://www.google.co.in/maps/place/Sai+Dental+care/@17.4528027,78.4039406,15z/data=!3m1!4b1!4m6!3m5!1s0x3bcb911967c75cc9:0x7b93069f0cb527a6!8m2!3d17.4527831!4d78.4223947!16s%2Fg%2F11gd3904gx?entry=ttu" 
           style="font-size: small;" class="contact-link">
         Click Here
@@ -259,7 +231,7 @@
           <div class="col-lg-6">
 
             <div class="row gy-4">
-              <div class="col-md-6">
+              <div class="col-md-6 col-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="200">
                   <i class="bi bi-geo-alt"></i>
                   <h3>Address</h3>
@@ -272,29 +244,31 @@
                 </div>
               </div><!-- End Info Item -->
 
-              <div class="col-md-6">
+              <div class="col-md-6 col-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="500">
                   <i class="bi bi-clock"></i>
                   <h3>Open Hours</h3>
                   <p>Monday - Saturday</p>
-                  <p>10:00 am - 12:00 pm</p>
+                  <p>10:00 am - 01:00 pm</p>
                   <p>05:00 pm - 09:00 pm</p>
                 </div>
               </div><!-- End Info Item -->
 
-              <div class="col-md-6">
+              <div class="col-md-6 col-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="300">
                   <i class="bi bi-telephone"></i>
                   <h3>Call Us</h3>
-                  <a href="tel:+919848052840" class="contact-link">+91-9848052840</a>  
+                  <a href="tel:04067822453" class="contact-link">040-6782-2453</a><br>
+                  <a href="tel:+919848052840" class="contact-link">9848-052-840</a>    
                 </div>
               </div><!-- End Info Item -->
 
-              <div class="col-md-6">
+              <div class="col-md-6 col-6">
                 <div class="info-item" data-aos="fade" data-aos-delay="400">
                   <i class="bi bi-envelope"></i>
                   <h3>Email Us</h3>
                   <a href="mailto:info@saidentalcare.com" class="mail-link">info@saidentalcare.com</a>
+                  <a href="mailto:bharatdr@yahoo.com" class="mail-link">bharatdr@yahoo.com</a>
                 </div>
               </div><!-- End Info Item -->
 
@@ -305,23 +279,23 @@
           </div>
 
           <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+            <form action="" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                  <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required>
                 </div>
 
                 <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Your Email" required>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                  <input type="text" class="form-control" id="number" name="number" placeholder="Your Number" required>
                 </div>
 
                 <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                  <textarea class="form-control" id="message" name="message" rows="6" placeholder="Message" required></textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
@@ -329,7 +303,7 @@
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
+                  <button type="submit" onclick="sendToWhatsapp2()">Send Message</button>
                 </div>
 
               </div>
@@ -386,9 +360,11 @@
 
       <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
         <h4>Contact Us</h4>
-        <p>Prakruthinivas apartments,</p>
-        <p>Kalyan nagar venture-3,</p>
-        <p>Mothi nagar, Hyderabad-500018</p><hr>
+        <strong>Address:</strong>
+        <a href="https://www.google.co.in/maps/place/Sai+Dental+care/@17.4528027,78.4039406,15z/data=!3m1!4b1!4m6!3m5!1s0x3bcb911967c75cc9:0x7b93069f0cb527a6!8m2!3d17.4527831!4d78.4223947!16s%2Fg%2F11gd3904gx?entry=ttu" 
+           class="contact-link">
+                    Prakruthinivas apartments, Kalyan nagar venture-3, Mothi nagar, Hyderabad-500018
+        </a><hr>
         <strong>Phone:</strong>
         <a href="tel:+919848052840" class="contact-link">+91-9848052840</a><hr> 
         <strong>Email:</strong>
