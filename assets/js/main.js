@@ -241,24 +241,50 @@ function sendToWhatsapp() {
 }
 
 function displayAlert(message, className) {
-  // Display validation message with proper CSS class
-  const alertDiv = document.createElement('div');
-  alertDiv.className = `alert ${className}`;
-  alertDiv.appendChild(document.createTextNode(message));
+  // Create a toast element
+  const toastDiv = document.createElement('div');
+  toastDiv.className = `toast align-items-center ${className}`;
+  toastDiv.setAttribute('role', 'alert');
+  toastDiv.setAttribute('aria-live', 'assertive');
+  toastDiv.setAttribute('aria-atomic', 'true');
 
-  // Add styles for a smaller alert box and bottom margin
-  alertDiv.style.fontSize = '12px'; // Adjust the font size as needed
-  alertDiv.style.padding = '8px'; // Adjust the padding as needed
-  alertDiv.style.borderRadius = '4px'; // Add border-radius for rounded corners
-  alertDiv.style.marginBottom = '10px'; // Add bottom margin
+  // Create the inner structure of the toast
+  const toastInnerDiv = document.createElement('div');
+  toastInnerDiv.className = 'd-flex';
 
+  const toastBodyDiv = document.createElement('div');
+  toastBodyDiv.className = 'toast-body text-black';
+  toastBodyDiv.appendChild(document.createTextNode(message));
+
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.className = 'btn-close me-2 m-auto';
+  closeButton.setAttribute('data-bs-dismiss', 'toast');
+  closeButton.setAttribute('aria-label', 'Close');
+
+  // Assemble the toast structure
+  toastInnerDiv.appendChild(toastBodyDiv);
+  toastInnerDiv.appendChild(closeButton);
+  toastDiv.appendChild(toastInnerDiv);
+
+  // Add styles for a smaller toast box and bottom margin (you can adjust these as needed)
+  toastDiv.style.fontSize = '12px';
+  toastDiv.style.padding = '8px';
+  toastDiv.style.borderRadius = '4px';
+  toastDiv.style.marginBottom = '10px';
+
+  // Insert the toast at the beginning of the form
   const form = document.getElementById('signupForm');
-  form.insertBefore(alertDiv, form.firstChild); // Insert the alert at the beginning of the form
+  form.insertBefore(toastDiv, form.firstChild);
 
-  // Remove the alert after 3 seconds
+  // Activate the Bootstrap Toast component
+  const toast = new bootstrap.Toast(toastDiv);
+  toast.show();
+
+  // Remove the toast after 3 seconds
   setTimeout(() => {
-    alertDiv.remove();
-  }, 2000);
+    toastDiv.remove();
+  }, 3000);
 }
 
 

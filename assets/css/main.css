@@ -104,8 +104,8 @@ h6 {
 .header .btn-getstarted:focus {
   color: var(--contrast-color);
   background: var(--accent-color);
-  font-size: 10px;
-  padding: 6px 5px;
+  font-size: 12px;
+  padding: 6px 10px;
   margin: 0;
   border-radius: 4px;
   transition: 0.3s;
