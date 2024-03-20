@@ -462,11 +462,12 @@ section {
 # Footer
 --------------------------------------------------------------*/
 .footer {
-  --background-color: #f4f4f4;
-  color: var(--default-color);
-  background-color: var(--background-color);
+  /* --background-color: #b9b3b371; */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.938), rgba(0, 0, 0, 0.5)), url(/assets/img/home/about-banner.jpg);
+  color: white;  /* color: var(--default-color); */
   font-size: 14px;
   padding-bottom: 50px;
+  background-size: cover;
 }
 
 .footer .footer-top {
@@ -484,7 +485,7 @@ section {
 }
 
 .footer .footer-about .logo span {
-  color: var(--heading-color);
+  color: white;
   font-size: 30px;
   font-weight: 700;
   letter-spacing: 1px;
@@ -503,10 +504,9 @@ section {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid rgba(var(--default-color-rgb), 0.5);
+  border: 1px solid rgba(var(--background-color-rgb), 0.5);
   font-size: 16px;
-  color: rgba(var(--default-color-rgb), 0.5);
-  margin-right: 10px;
+  color: white;  margin-right: 10px;
   transition: 0.3s;
 }
 
@@ -516,7 +516,7 @@ section {
 }
 
 .footer h4 {
-  color: var(--heading-color);
+  color: white;
   font-size: 16px;
   font-weight: bold;
   position: relative;
@@ -550,7 +550,7 @@ section {
 }
 
 .footer .footer-links ul a {
-  color: rgba(var(--default-color-rgb), 0.8);
+  color: white;
   display: inline-block;
   line-height: 1;
 }
@@ -566,7 +566,7 @@ section {
 .footer .copyright {
   padding-top: 25px;
   padding-bottom: 25px;
-  background-color: rgba(var(--default-color-rgb), 0.05);
+  background-color: #eef6f73e;
 }
 
 .footer .copyright p {

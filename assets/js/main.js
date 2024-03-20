@@ -229,16 +229,23 @@ function sendToWhatsapp() {
   const nameInput = document.getElementById('nameInput').value.trim();
   const emailInput = document.getElementById('emailInput').value.trim();
   const numberInput = document.getElementById('numberInput').value.trim();
+  const dateInput = document.getElementById('dateInput').value.trim();
+  const timeInput = document.getElementById('timeInput').value.trim();
+  const ampmInput = document.getElementById('ampmInput').value.trim();
+  const formattedDateTime = dateInput + " " + timeInput + " " + ampmInput;
+
   const messageInput = document.getElementById('messageInput').value.trim();
 
   var url = "https://wa.me/" + number + "?text="
     + "*Name*: " + nameInput + "%0a"
     + "*Email*: " + emailInput + "%0a"
     + "*Number*: " + numberInput + "%0a"
+    + "*Date and Time*: " + formattedDateTime + "%0a"
     + "*Message*: " + messageInput + "%0a%0a";
 
   window.open(url, '_blank').focus();
 }
+
 
 function displayAlert(message, className) {
   // Create a toast element
@@ -315,7 +322,7 @@ function prevField(prevFieldId) {
 }
 
 function hideAllFields() {
-  const fieldIds = ['nameField', 'emailField', 'numberField', 'messageField'];
+  const fieldIds = ['nameField', 'emailField', 'numberField', 'dateTimeField', 'messageField'];
   fieldIds.forEach(fieldId => {
     document.getElementById(fieldId).style.display = 'none';
   });
@@ -360,6 +367,20 @@ function validateNumberField() {
   return true;
 }
 
+function validateDateTimeField() {
+  const dateInput = document.getElementById('dateInput').value.trim();
+  const timeInput = document.getElementById('timeInput').value.trim();
+  const ampmInput = document.getElementById('ampmInput').value.trim();
+
+  if (!dateInput || !timeInput || !ampmInput) {
+    displayAlert("Please select both date and time.", "alert-danger");
+    return false;
+  }
+
+  return true;
+}
+
+
 // Add event listener for Enter key press
 document.addEventListener('keydown', function (event) {
   if (event.key === 'Enter') {
@@ -375,5 +396,96 @@ function simulateNextButtonClick() {
     nextButton.click();
   }
 }
+
+
+
+
+// function nextField(nextFieldId, validationFunction = null) {
+//   if (validationFunction && !window[validationFunction]()) {
+//     return;
+//   }
+
+//   hideAllFields();
+//   document.getElementById(nextFieldId).style.display = 'block';
+
+//   // Focus on the first input field of the displayed section
+//   const firstInputField = document.getElementById(nextFieldId).querySelector('input, textarea');
+//   if (firstInputField) {
+//     firstInputField.focus();
+//   }
+// }
+
+// function prevField(prevFieldId) {
+//   hideAllFields();
+//   document.getElementById(prevFieldId).style.display = 'block';
+
+//   // Focus on the first input field of the displayed section
+//   const firstInputField = document.getElementById(prevFieldId).querySelector('input, textarea');
+//   if (firstInputField) {
+//     firstInputField.focus();
+//   }
+// }
+
+// function hideAllFields() {
+//   const fieldIds = ['nameField', 'emailField', 'numberField', 'messageField'];
+//   fieldIds.forEach(fieldId => {
+//     document.getElementById(fieldId).style.display = 'none';
+//   });
+// }
+
+// function isValidEmail(email) {
+//   // Basic email validation using a regular expression
+//   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+//   return emailRegex.test(email);
+// }
+
+// function validateNameField() {
+//   const nameInput = document.getElementById('nameInput').value.trim();
+
+//   if (nameInput === "") {
+//     displayAlert("Please enter your name.", "alert-danger");
+//     return false;
+//   }
+
+//   return true;
+// }
+
+// function validateEmailField() {
+//   const emailInput = document.getElementById('emailInput').value.trim();
+
+//   if (!isValidEmail(emailInput)) {
+//     displayAlert("Please enter a valid email address", "alert-danger");
+//     return false;
+//   }
+
+//   return true;
+// }
+
+// function validateNumberField() {
+//   const numberInput = document.getElementById('numberInput').value.trim();
+
+//   if (numberInput === "" || !/^[0-9]{10}$/.test(numberInput)) {
+//     displayAlert("Please enter a valid 10-digit number.", "alert-danger");
+//     return false;
+//   }
+
+//   return true;
+// }
+
+// // Add event listener for Enter key press
+// document.addEventListener('keydown', function (event) {
+//   if (event.key === 'Enter') {
+//     event.preventDefault(); // Prevent default form submission behavior
+//     simulateNextButtonClick();
+//   }
+// });
+
+// function simulateNextButtonClick() {
+//   const activeField = document.querySelector('.inputFields[style="display: block;"]');
+//   const nextButton = activeField.querySelector('.btn-primary:not([onclick*="prevField"])');
+//   if (nextButton) {
+//     nextButton.click();
+//   }
+// }
 
 
